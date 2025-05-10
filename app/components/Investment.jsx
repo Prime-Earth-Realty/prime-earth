@@ -9,7 +9,7 @@ export default function Investment() {
         "Full documentation"
       ],
       tags: ["Residential", "Secure", "Premium"],
-      description: "Prime plots in Tsopoli's fastest-growing sector with complete legal documentation and clear titles."
+      description: "Prime plots in fast developing locations with complete legal documentation and clear titles."
     },
     {
       title: "Growth Zone",
@@ -20,7 +20,7 @@ export default function Investment() {
         "Airport City proximity"
       ],
       tags: ["Commercial", "Appreciating", "Strategic"],
-      description: "Strategic locations near upcoming developments with high appreciation potential."
+      description: "Strategic locations with high appreciation potential."
     },
     {
       title: "Flexi-Own",
@@ -41,7 +41,7 @@ export default function Investment() {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="font-serif text-3xl md:text-4xl font-bold text-green-800 mb-4">
-            Secure Your Legacy in Tsopoli
+            Secure Your Legacy With Us
           </h2>
           <p className="text-xl text-gray-600 font-sans">
             Discover prime land opportunities with guaranteed growth potential
