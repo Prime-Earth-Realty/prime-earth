@@ -1,4 +1,5 @@
 import './globals.css';
+import Header from './components/Header';
 
 export default function RootLayout({
   children,
@@ -6,9 +7,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-        <body className="antialiased">
+    <html lang="en" suppressHydrationWarning>
+      <body className="antialiased transition-colors duration-200">
+      
+        <Header />
         {children}
+        
       </body>
     </html>
   );
