@@ -1,29 +1,31 @@
-'use client';
+"use client";
 
 export default function FAQ() {
   const faqs = [
     {
       question: "What documents will I receive?",
-      answer: "You'll receive indenture, site plan, and full land title documentation upon completion."
+      answer:
+        "You will receive the indenture and site plan complementary upon full payment. We could assist with facilitation of land title documentation at an added cost",
     },
     {
       question: "Are there installment options?",
-      answer: "Yes! We offer flexible 3-12 month payment plans with 30% deposit."
+      answer:
+        "Yes! We offer flexible 3-12 months payment plans with a paid deposit.",
     },
     {
       question: "How soon can I start building?",
-      answer: "Immediately after full payment - all plots are litigation-free and ready for development."
+      answer: "Immediately after completion of land title documentation",
     },
     {
-      question: "Is financing available?",
-      answer: "We partner with local banks to help secure mortgages for construction after purchase."
-    }
+      question: "Where are the plots located?",
+      answer: "Ningo Prampram, Tema Community 25, Tsopoli",
+    },
   ];
 
   const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
+    const contactSection = document.getElementById("contact");
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+      contactSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -38,10 +40,10 @@ export default function FAQ() {
             Find answers to common questions about our land purchase process
           </p>
         </div>
-        
+
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div 
+            <div
               key={index}
               className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
             >
@@ -52,17 +54,17 @@ export default function FAQ() {
                   </h3>
                   <div className="flex-shrink-0 ml-2">
                     <div className="w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center group-open:bg-teal-100 transition-colors">
-                      <svg 
-                        className="w-4 h-4 text-teal-600 transform group-open:rotate-180 transition-transform" 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
+                      <svg
+                        className="w-4 h-4 text-teal-600 transform group-open:rotate-180 transition-transform"
+                        fill="none"
+                        viewBox="0 0 24 24"
                         stroke="currentColor"
                       >
-                        <path 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round" 
-                          strokeWidth={2} 
-                          d="M19 9l-7 7-7-7" 
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
                         />
                       </svg>
                     </div>
@@ -77,15 +79,13 @@ export default function FAQ() {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-gray-600 mb-4">
-            Still have questions?
-          </p>
-          <button 
-          onClick={scrollToContact}
-          className="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
-        >
-          Contact Us
-        </button>
+          <p className="text-gray-600 mb-4">Still have questions?</p>
+          <button
+            onClick={scrollToContact}
+            className="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
+          >
+            Contact Us
+          </button>
         </div>
       </div>
     </section>
