@@ -14,7 +14,15 @@ export default function Testimonials() {
     {
       quote: "I chose Prime Earth Realty for its exceptional service and dependability. Their professionalism and commitment to future-focused land investment make them a reliable source for anyone looking to build assets.",
       name: "Theophilia Asiedu",
-    }
+    },
+    {
+      quote: "As a first-time buyer, I found Prime Earth Realty’s transparency, verified documentation, and clear guidance very reassuring. The entire process—from purchase to starting construction—was smooth and stress-free. I especially value their flexible payment plans, absence of hidden charges, and the ease of beginning my project. Based on both my experience and that of my siblings, I confidently recommend them for their integrity and reliability.",
+      name: "Emerald Regina Dodoo",
+    },
+    {
+      quote: "I chose Prime Earth Realty for their transparent and efficient process, which made the entire experience seamless from inquiry to documentation. Their team was consistently available, professional, and supportive throughout. Owning a verified plot with clear documentation has given me real peace of mind. I highly recommend them for their expertise, integrity, and strong customer focus",
+      name: "Mr. Brian Doodo",
+    },
   ];
 
   return (
