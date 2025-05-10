@@ -6,7 +6,7 @@ export default function AboutUs() {
           {/* Left Column - Image */}
           <div className="relative h-96 rounded-xl overflow-hidden shadow-lg">
             <img 
-              src="/about-us.jpeg" 
+              src="/fullplot.jpeg" 
               alt="Prime Earth Realty leadership team standing on a property site"
               className="w-full h-full object-cover"
             />
