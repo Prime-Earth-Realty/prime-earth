@@ -27,7 +27,7 @@ export default function Hero() {
           Unlock Your Future with Prime Earth Realty
         </h1>
         <p className="text-xl md:text-2xl mb-8 text-white">
-          Own A Land in Tsopoli, Ghana
+        Secure Your Future in Ghana's Most Strategic Locations
         </p>
       </div>
     </section>
