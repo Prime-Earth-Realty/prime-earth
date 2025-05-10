@@ -1,4 +1,3 @@
-// components/AboutUs.tsx
 export default function AboutUs() {
   return (
     <section id="about" className="py-16 bg-white scroll-mt-24">
