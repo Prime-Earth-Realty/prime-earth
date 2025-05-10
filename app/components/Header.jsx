@@ -16,7 +16,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-#E4E4E4 shadow-md">
+    <header className="bg-[#E4E4E4] shadow-md">
       {/* Main Navigation */}
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
@@ -30,10 +30,11 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#home" className="text-teal-800 hover:text-teal-200 font-medium transition">Home</a>
-          <a href="#about" className="text-teal-800 hover:text-teal-200 font-medium transition">About Us</a>
-          <a href="#invest" className="text-teal-800 hover:text-teal-200 font-medium transition">Why Invest</a>
-          <a href="#faq" className="text-teal-800 hover:text-teal-200 font-medium transition">FAQ</a>
+          <a href="/" className="text-teal-800 hover:text-teal-200 font-medium transition">Home</a>
+          <a href="/#about" className="text-teal-800 hover:text-teal-200 font-medium transition">About Us</a>
+          <a href="/#invest" className="text-teal-800 hover:text-teal-200 font-medium transition">Why Invest</a>
+          <a href="/properties" className="text-teal-800 hover:text-teal-200 font-medium transition">Properties</a>
+          <a href="/#faq" className="text-teal-800 hover:text-teal-200 font-medium transition">FAQ</a>
           <a 
             href="#contact" 
             className="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-6 rounded-lg transition-colors shadow-sm"
@@ -42,7 +43,7 @@ export default function Header() {
           </a>
         </nav>
 
-        {/* Mobile Menu Button - Now fixed positioned when menu is open */}
+        {/* Mobile Menu Button */}
         <button
           onClick={toggleMenu}
           className={`md:hidden text-black focus:outline-none ${isMenuOpen ? 'fixed top-6 right-6 z-50 text-white' : 'relative'}`}
@@ -61,37 +62,14 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile Menu - Simplified transition */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="fixed inset-0 bg-teal-800/95 backdrop-blur-sm flex flex-col items-center justify-center space-y-8 text-white text-xl md:hidden z-40">
-          <a 
-            href="#home" 
-            onClick={handleLinkClick} 
-            className="hover:text-teal-200 transition transform hover:scale-105"
-          >
-            Home
-          </a>
-          <a 
-            href="#about" 
-            onClick={handleLinkClick} 
-            className="hover:text-teal-200 transition transform hover:scale-105"
-          >
-            About Us
-          </a>
-          <a 
-            href="#invest" 
-            onClick={handleLinkClick} 
-            className="hover:text-teal-200 transition transform hover:scale-105"
-          >
-            Why Invest
-          </a>
-          <a 
-            href="#faq" 
-            onClick={handleLinkClick} 
-            className="hover:text-teal-200 transition transform hover:scale-105"
-          >
-            FAQ
-          </a>
+          <a href="#home" onClick={handleLinkClick} className="hover:text-teal-200 transition transform hover:scale-105">Home</a>
+          <a href="#about" onClick={handleLinkClick} className="hover:text-teal-200 transition transform hover:scale-105">About Us</a>
+          <a href="#invest" onClick={handleLinkClick} className="hover:text-teal-200 transition transform hover:scale-105">Why Invest</a>
+          <a href="/properties" onClick={handleLinkClick} className="hover:text-teal-200 transition transform hover:scale-105">Properties</a>
+          <a href="#faq" onClick={handleLinkClick} className="hover:text-teal-200 transition transform hover:scale-105">FAQ</a>
           <a 
             href="#contact" 
             onClick={handleLinkClick} 
