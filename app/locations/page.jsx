@@ -1,0 +1,270 @@
+'use client';
+
+import { useState, useRef } from 'react';
+import dynamic from 'next/dynamic';
+import { FiChevronLeft, FiChevronRight, FiMapPin, FiDollarSign, FiLayers, FiHome } from 'react-icons/fi';
+
+// Dynamic imports
+const Map = dynamic(() => import('@/app/components/Map'), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-gray-100 flex items-center justify-center">Loading map...</div>
+});
+
+export default function LocationsPage() {
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const carouselRef = useRef(null);
+
+  const locations = [
+    {
+      id: 1,
+      name: 'Ningo Prampram',
+      coordinates: [5.808432294194406, 0.12828909900043034],
+      description: 'Fast-growing residential area with upcoming infrastructure projects including new roads and commercial centers.',
+      images: [],
+      properties: []
+    },
+    {
+        id: 2,
+        name: 'Tema Community 25',
+        coordinates: [5.72744634233405, 0.01574986897821217],
+        description: 'Fast-growing residential area with upcoming infrastructure projects including new roads and commercial centers.',
+        images: [
+        ],
+        
+        properties: [ ]
+      },
+      {
+        id: 3,
+        name: 'Tsopoli',
+        coordinates: [5.872741, 0.209403],
+        description: 'Fast-growing residential area with upcoming infrastructure projects including new roads and commercial centers.',
+        images: [
+          '/Tsopoli/tsopoli_3.jpeg',
+          '/Tsopoli/tsopoli_2.jpeg',
+          '/Tsopoli/tsopoli_1.jpeg',
+          '/Tsopoli/tsopoli_4.jpeg',
+          '/Tsopoli/tsopoli_5.jpeg',
+          '/Tsopoli/tsopoli_6.jpeg',
+          '/Tsopoli/tsopoli_7.jpeg',
+          '/Tsopoli/tsopoli_8.jpeg',
+          '/Tsopoli/tsopoli_9.jpeg',
+          '/Tsopoli/tsopoli_10.jpeg',
+          '/Tsopoli/tsopoli_11.jpeg',
+        ],
+        
+        properties: [ 
+            {
+                id: 101,
+                image:'property1_2.jpeg',
+                title: 'Commercial Corner Plot',
+                price: '45,000',
+                size: '100×100 ft',
+                status: 'Available',
+                features: ['Prime commercial location', 'High visibility', 'Near planned market', 'Full documentation'],
+                contact: '+233 53 379 7792'
+              }
+         ]
+      },
+  ];
+
+  const nextImage = () => {
+    setCurrentImageIndex(prev => 
+      prev === selectedLocation.images.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex(prev => 
+      prev === 0 ? selectedLocation.images.length - 1 : prev - 1
+    );
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      
+      <main className="container mx-auto py-12 px-4">
+        <h1 className="text-4xl font-bold text-center text-teal-800 mb-2">Our Locations</h1>
+        <p className="text-lg text-center text-gray-600 mb-12">Select a location to explore properties</p>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Location List */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-xl shadow-md p-6 sticky top-4">
+              <h2 className="text-xl font-semibold mb-4 text-gray-800">Available Locations</h2>
+              <div className="space-y-3">
+                {locations.map(location => (
+                  <button
+                    key={location.id}
+                    onClick={() => {
+                      setSelectedLocation(location);
+                      setCurrentImageIndex(0);
+                    }}
+                    className={`w-full text-left p-4 rounded-lg transition-colors ${selectedLocation?.id === location.id ? 'bg-teal-100 text-teal-800' : 'bg-gray-100 hover:bg-gray-200 text-gray-800'}`}
+                  >
+                    <h3 className="font-medium">{location.name}</h3>
+                    <p className="text-sm text-gray-600 mt-1">
+                      {location.properties.length} propert{location.properties.length !== 1 ? 'ies' : 'y'} available
+                    </p>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Location Details */}
+          <div className="lg:col-span-2">
+            {selectedLocation ? (
+              <div className="bg-white rounded-xl shadow-md overflow-hidden">
+                {/* Map Section */}
+                <div className="h-96 w-full relative">
+                  <Map coordinates={selectedLocation.coordinates} />
+                </div>
+
+                {/* Location Info */}
+                <div className="p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <h2 className="text-2xl font-bold text-gray-800">{selectedLocation.name}</h2>
+                    <span className="bg-teal-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                      {selectedLocation.properties.length} Properties
+                    </span>
+                  </div>
+
+                  <p className="text-gray-700 mb-6">{selectedLocation.description}</p>
+
+                  {/* Image Carousel */}
+                  <div className="mb-8">
+                    <h3 className="text-lg font-semibold text-gray-800 mb-3">Location Photos</h3>
+                    <div className="relative">
+                      <div 
+                        ref={carouselRef}
+                        className="relative h-64 w-full overflow-hidden rounded-lg bg-gray-100"
+                      >
+                        <img 
+                          src={selectedLocation.images[currentImageIndex]} 
+                          alt={`${selectedLocation.name} view ${currentImageIndex + 1}`}
+                          className="w-full h-full object-cover transition-opacity duration-300"
+                        />
+                        
+                        <button 
+                          onClick={prevImage}
+                          className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md hover:bg-white transition-colors"
+                          aria-label="Previous image"
+                        >
+                          <FiChevronLeft className="w-5 h-5 text-gray-800" />
+                        </button>
+                        
+                        <button 
+                          onClick={nextImage}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md hover:bg-white transition-colors"
+                          aria-label="Next image"
+                        >
+                          <FiChevronRight className="w-5 h-5 text-gray-800" />
+                        </button>
+                        
+                        <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-2">
+                          {selectedLocation.images.map((_, index) => (
+                            <button
+                              key={index}
+                              onClick={() => setCurrentImageIndex(index)}
+                              className={`w-2 h-2 rounded-full ${currentImageIndex === index ? 'bg-teal-600' : 'bg-white/50'}`}
+                              aria-label={`Go to image ${index + 1}`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Properties List */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-4">Available Properties</h3>
+                    {selectedLocation.properties.length > 0 ? (
+                      <div className="space-y-6">
+                        {selectedLocation.properties.map(property => (
+                          <div key={property.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+                            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
+                              {/* Property Image */}
+                              <div className="md:w-1/3">
+                                <div className="aspect-[4/3] bg-gray-100 rounded-lg overflow-hidden">
+                                  <img 
+                                    src={property.image} 
+                                    alt={property.title}
+                                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                  />
+                                </div>
+                              </div>
+                              
+                              {/* Property Details */}
+                              <div className="md:w-2/3">
+                                <div className="flex justify-between items-start">
+                                  <h4 className="text-xl font-bold text-gray-800">{property.title}</h4>
+                                  <span className="bg-teal-100 text-teal-800 px-2 py-1 rounded text-sm font-medium">
+                                    {property.status}
+                                  </span>
+                                </div>
+                                
+                                <div className="flex flex-wrap gap-4 mt-3 mb-4">
+                                  <div className="flex items-center text-gray-700">
+                                    <FiDollarSign className="mr-2 text-teal-600" />
+                                    <span>{property.price}</span>
+                                  </div>
+                                  <div className="flex items-center text-gray-700">
+                                    <FiLayers className="mr-2 text-teal-600" />
+                                    <span>{property.size}</span>
+                                  </div>
+                                  <div className="flex items-center text-gray-700">
+                                    <FiMapPin className="mr-2 text-teal-600" />
+                                    <span>{selectedLocation.name}</span>
+                                  </div>
+                                </div>
+                                
+                                <div className="mb-4">
+                                  <h5 className="font-medium text-gray-800 mb-2">Key Features:</h5>
+                                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                    {property.features.map((feature, index) => (
+                                      <li key={index} className="flex items-start text-gray-600">
+                                        <svg className="w-4 h-4 mt-1 mr-2 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                        </svg>
+                                        {feature}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                                
+                                <a
+                                  href={`tel:${property.contact.replace(/\D/g, '')}`}
+                                  className="inline-block bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
+                                >
+                                  Contact Agent
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                        <p className="text-yellow-700">No properties currently listed for this location. Check back soon!</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="bg-white rounded-xl shadow-md p-12 text-center">
+                <svg className="w-16 h-16 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <h3 className="text-xl font-medium text-gray-700 mt-4">Select a location</h3>
+                <p className="text-gray-500 mt-2">Choose from the list to view details</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}

@@ -34,6 +34,7 @@ export default function Header() {
           <a href="/#about" className="text-teal-800 hover:text-teal-200 font-medium transition">About Us</a>
           <a href="/#invest" className="text-teal-800 hover:text-teal-200 font-medium transition">Why Invest</a>
           <a href="/properties" className="text-teal-800 hover:text-teal-200 font-medium transition">Properties</a>
+          <a href="/locations" className="text-teal-800 hover:text-teal-200 font-medium transition"> Locations</a>
           <a href="/#faq" className="text-teal-800 hover:text-teal-200 font-medium transition">FAQ</a>
           <a 
             href="#contact" 
@@ -65,13 +66,14 @@ export default function Header() {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="fixed inset-0 bg-teal-800/95 backdrop-blur-sm flex flex-col items-center justify-center space-y-8 text-white text-xl md:hidden z-40">
-          <a href="#home" onClick={handleLinkClick} className="hover:text-teal-200 transition transform hover:scale-105">Home</a>
-          <a href="#about" onClick={handleLinkClick} className="hover:text-teal-200 transition transform hover:scale-105">About Us</a>
-          <a href="#invest" onClick={handleLinkClick} className="hover:text-teal-200 transition transform hover:scale-105">Why Invest</a>
+          <a href="/#home" onClick={handleLinkClick} className="hover:text-teal-200 transition transform hover:scale-105">Home</a>
+          <a href="/#about" onClick={handleLinkClick} className="hover:text-teal-200 transition transform hover:scale-105">About Us</a>
+          <a href="/#invest" onClick={handleLinkClick} className="hover:text-teal-200 transition transform hover:scale-105">Why Invest</a>
           <a href="/properties" onClick={handleLinkClick} className="hover:text-teal-200 transition transform hover:scale-105">Properties</a>
-          <a href="#faq" onClick={handleLinkClick} className="hover:text-teal-200 transition transform hover:scale-105">FAQ</a>
+          <a href="/locations" className="hover:text-teal-200 transition transform hover:scale-105"> Locations</a>
+          <a href="/#faq" onClick={handleLinkClick} className="hover:text-teal-200 transition transform hover:scale-105">FAQ</a>
           <a 
-            href="#contact" 
+            href="/#contact" 
             onClick={handleLinkClick} 
             className="mt-4 bg-teal-600 hover:bg-teal-700 text-white font-medium py-3 px-8 rounded-lg transition-colors shadow-sm"
           >
