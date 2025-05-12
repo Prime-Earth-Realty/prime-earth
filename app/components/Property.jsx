@@ -1,20 +1,47 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { FiLayers, FiMapPin } from 'react-icons/fi';
 
 export default function Properties() {
-  const media = [
-    { type: 'image', src: 'property1.jpeg' },
-    { type: 'image', src: 'property1_2.jpeg' },
-    { type: 'video', src: 'property1_3.mp4' },
-    { type: 'video', src: 'property1_4.mp4' },
-    { type: 'video', src: 'property1_5.mp4' },
+  const properties = [
+    {
+      id: 1,
+      title: "Uncompleted House For Sale",
+      status: "For Sale",
+      price: "$45,000",
+      size: "2,500 sq ft",
+      location: "Abokobi Boi",
+      image: "property1.jpeg",
+      features: [
+        "4 Bedrooms",
+        "3 Bathrooms",
+      ],
+      contact: "+233 53 379 7792",
+      media: [
+        { type: 'image', src: 'property1.jpeg' },
+        { type: 'image', src: 'property1_2.jpeg' },
+        { type: 'video', src: 'property1_3.mp4' },
+        { type: 'video', src: 'property1_4.mp4' },
+        { type: 'video', src: 'property1_5.mp4' },
+      ]
+    },
   ];
 
   const [selectedMediaIndex, setSelectedMediaIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentProperty, setCurrentProperty] = useState(null);
+  const videoRef = useRef(null);
 
-  const openModal = (index = 0) => {
+  useEffect(() => {
+    if (videoRef.current && currentProperty?.media[selectedMediaIndex]?.type === 'video') {
+      videoRef.current.load();
+      videoRef.current.play().catch(e => console.log("Autoplay prevented:", e));
+    }
+  }, [selectedMediaIndex, currentProperty]);
+
+  const openModal = (property, index = 0) => {
+    setCurrentProperty(property);
     setSelectedMediaIndex(index);
     setIsModalOpen(true);
   };
@@ -25,65 +52,90 @@ export default function Properties() {
 
   const navigateMedia = (direction) => {
     if (direction === 'prev') {
-      setSelectedMediaIndex((prev) => (prev === 0 ? media.length - 1 : prev - 1));
+      setSelectedMediaIndex((prev) => (prev === 0 ? currentProperty.media.length - 1 : prev - 1));
     } else {
-      setSelectedMediaIndex((prev) => (prev === media.length - 1 ? 0 : prev + 1));
+      setSelectedMediaIndex((prev) => (prev === currentProperty.media.length - 1 ? 0 : prev + 1));
     }
   };
 
   return (
     <div className="p-8 max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8 text-center">Property for Sale</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        {/* Media section */}
-        <div className="space-y-4">
-          {media[0].type === 'image' ? (
-            <img
-              src={media[0].src}
-              alt="Property main image"
-              className="rounded-lg shadow-md w-full h-72 object-cover cursor-pointer"
-              onClick={() => openModal(0)}
-            />
-          ) : (
-            <video
-              controls
-              muted
-              className="rounded-lg shadow-md w-full h-72 object-cover cursor-pointer"
-              onClick={() => openModal(0)}
-            >
-              <source src={media[0].src} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          )}
-        </div>
-
-        {/* Details section */}
-        <div className="flex flex-col justify-between space-y-6">
-          <div>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-2">USD 45,000.00</h2>
-            <p className="text-lg text-gray-700">
-              This property includes both the building and the land. Ideal for residential or investment purposes.
-            </p>
+      <h3 className="text-lg font-semibold text-gray-800 mb-4">Available Properties</h3>
+      <div className="space-y-6">
+        {properties.map(property => (
+          <div key={property.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
+              {/* Property Image */}
+              <div className="md:w-1/3">
+                <div className="aspect-[4/3] bg-gray-100 rounded-lg overflow-hidden cursor-pointer">
+                  <img 
+                    src={property.image} 
+                    alt={property.title}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    onClick={() => openModal(property, 0)}
+                  />
+                </div>
+              </div>
+              
+              {/* Property Details */}
+              <div className="md:w-2/3">
+                <div className="flex justify-between items-start">
+                  <h4 className="text-xl font-bold text-gray-800">{property.title}</h4>
+                  <span className="bg-teal-100 text-teal-800 px-2 py-1 rounded text-sm font-medium">
+                    {property.status}
+                  </span>
+                </div>
+                
+                <div className="flex flex-wrap gap-4 mt-3 mb-4">
+                  <div className="flex items-center text-gray-700">
+                    <span>{property.price}</span>
+                  </div>
+                  <div className="flex items-center text-gray-700">
+                    <FiLayers className="mr-2 text-teal-600" />
+                    <span>{property.size}</span>
+                  </div>
+                  <div className="flex items-center text-gray-700">
+                    <FiMapPin className="mr-2 text-teal-600" />
+                    <span>{property.location}</span>
+                  </div>
+                </div>
+                
+                <div className="mb-4">
+                  <h5 className="font-medium text-gray-800 mb-2">Key Features:</h5>
+                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {property.features.map((feature, index) => (
+                      <li key={index} className="flex items-start text-gray-600">
+                        <svg className="w-4 h-4 mt-1 mr-2 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div className="flex flex-wrap gap-4">
+                  <a
+                    href={`tel:${property.contact.replace(/\D/g, '')}`}
+                    className="inline-block bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
+                  >
+                    Contact Us
+                  </a>
+                  <button
+                    onClick={() => openModal(property, 0)}
+                    className="inline-block bg-gray-800 hover:bg-gray-900 text-white font-medium py-2 px-6 rounded-lg transition-colors"
+                  >
+                    View All Media
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="flex space-x-4">
-            <button
-              onClick={() => openModal(0)}
-              className="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-6 rounded-lg transition"
-            >
-              View All
-            </button>
-            <a
-              href="/#contact"
-              className="bg-gray-800 hover:bg-gray-900 text-white font-medium py-2 px-6 rounded-lg transition"
-            >
-              Contact Us
-            </a>
-          </div>
-        </div>
+        ))}
       </div>
 
       {/* Modal */}
-      {isModalOpen && (
+      {isModalOpen && currentProperty && (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-auto">
             <div className="p-4">
@@ -96,22 +148,26 @@ export default function Properties() {
                 </svg>
               </button>
               
+              {/* Property title in modal */}
+              <h3 className="text-xl font-bold mb-4">{currentProperty.title}</h3>
+              
               {/* Main media display */}
               <div className="relative mb-4">
-                {media[selectedMediaIndex].type === 'image' ? (
+                {currentProperty.media[selectedMediaIndex].type === 'image' ? (
                   <img
-                    src={media[selectedMediaIndex].src}
+                    src={currentProperty.media[selectedMediaIndex].src}
                     alt={`Property image ${selectedMediaIndex + 1}`}
                     className="rounded-lg w-full h-96 object-contain"
                   />
                 ) : (
                   <video
+                    ref={videoRef}
                     controls
                     autoPlay
-                    muted
+                    key={currentProperty.media[selectedMediaIndex].src}
                     className="rounded-lg w-full h-96 object-contain"
                   >
-                    <source src={media[selectedMediaIndex].src} type="video/mp4" />
+                    <source src={currentProperty.media[selectedMediaIndex].src} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 )}
@@ -137,7 +193,7 @@ export default function Properties() {
               
               {/* Carousel thumbnails */}
               <div className="flex space-x-2 overflow-x-auto py-2">
-                {media.map((item, index) => (
+                {currentProperty.media.map((item, index) => (
                   <div
                     key={index}
                     onClick={() => setSelectedMediaIndex(index)}
