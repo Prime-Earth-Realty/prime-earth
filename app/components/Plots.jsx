@@ -81,7 +81,7 @@ export default function Plots() {
                         : "bg-gray-100 hover:bg-gray-200 text-gray-800"
                     }`}
                   >
-                    Reserve Now
+                    Book a call
                   </button>
                 </div>
               </div>

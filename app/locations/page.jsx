@@ -7,7 +7,7 @@ import { FiChevronLeft, FiChevronRight, FiMapPin, FiDollarSign, FiLayers } from 
 // Dynamic import for map
 const Map = dynamic(() => import('@/app/components/Map'), {
   ssr: false,
-  loading: () => <div className="h-96 bg-gray-100 flex items-center justify-center">Loading map...</div>
+  loading: () => <div className="h-96 bg-gray-100 flex items-center justify-center">Loading map...</div>,
 });
 
 export default function LocationsPage() {
@@ -22,7 +22,7 @@ export default function LocationsPage() {
       coordinates: [5.808432294194406, 0.12828909900043034],
       description: 'Fast-growing residential area with upcoming infrastructure projects including new roads and commercial centers.',
       images: [],
-      properties: []
+      properties: [],
     },
     {
       id: 2,
@@ -30,7 +30,7 @@ export default function LocationsPage() {
       coordinates: [5.72744634233405, 0.01574986897821217],
       description: 'Fast-growing residential area with upcoming infrastructure projects including new roads and commercial centers.',
       images: [],
-      properties: []
+      properties: [],
     },
     {
       id: 3,
@@ -38,19 +38,19 @@ export default function LocationsPage() {
       coordinates: [5.872741, 0.209403],
       description: 'Fast-growing residential area with upcoming infrastructure projects including new roads and commercial centers.',
       images: [
-        '/Tsopoli/tsopoli_3.jpeg',
-        '/Tsopoli/tsopoli_2.jpeg',
-        '/Tsopoli/tsopoli_1.jpeg',
-        '/Tsopoli/tsopoli_4.jpeg',
-        '/Tsopoli/tsopoli_5.jpeg',
-        '/Tsopoli/tsopoli_6.jpeg',
-        '/Tsopoli/tsopoli_7.jpeg',
-        '/Tsopoli/tsopoli_8.jpeg',
-        '/Tsopoli/tsopoli_9.jpeg',
-        '/Tsopoli/tsopoli_10.jpeg',
-        '/Tsopoli/tsopoli_11.jpeg',
+        '/Tsopoli/Tsopoli_3.jpeg',
+        '/Tsopoli/Tsopoli_2.jpeg',
+        '/Tsopoli/Tsopoli_1.jpeg',
+        '/Tsopoli/Tsopoli_4.jpeg',
+        '/Tsopoli/Tsopoli_5.jpeg',
+        '/Tsopoli/Tsopoli_6.jpeg',
+        '/Tsopoli/Tsopoli_7.jpeg',
+        '/Tsopoli/Tsopoli_8.jpeg',
+        '/Tsopoli/Tsopoli_9.jpeg',
+        '/Tsopoli/Tsopoli_10.jpeg',
+        '/Tsopoli/Tsopoli_11.jpeg',
       ],
-      properties: []
+      properties: [],
     },
   ];
 
@@ -78,7 +78,7 @@ export default function LocationsPage() {
             <div className="bg-white rounded-xl shadow-md p-6 sticky top-4">
               <h2 className="text-xl font-semibold mb-4 text-gray-800">Available Locations</h2>
               <div className="space-y-3">
-                {locations.map(location => (
+                {locations.map((location) => (
                   <button
                     key={location.id}
                     onClick={() => {
@@ -97,7 +97,6 @@ export default function LocationsPage() {
                     </p>
                   </button>
                 ))}
-
                 {selectedLocation && (
                   <button
                     onClick={() => setSelectedLocation(null)}
@@ -142,7 +141,7 @@ export default function LocationsPage() {
                           <img
                             src={selectedLocation.images[currentImageIndex]}
                             alt={`${selectedLocation.name} view ${currentImageIndex + 1}`}
-                            className="w-full h-full transition-opacity duration-300"
+                            className="w-full h-full transition-opacity duration-300 object-cover"
                           />
 
                           <button
@@ -175,21 +174,97 @@ export default function LocationsPage() {
                     </div>
                   )}
 
-                  {/* Property List */}
+                  {/* Properties List */}
                   <div>
                     <h3 className="text-lg font-semibold text-gray-800 mb-4">Available Properties</h3>
                     {selectedLocation.properties.length > 0 ? (
                       <div className="space-y-6">
-                        {/* Your property card rendering logic here */}
+                        {selectedLocation.properties.map((property) => (
+                          <div
+                            key={property.id}
+                            className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow"
+                          >
+                            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
+                              {/* Property Image */}
+                              <div className="md:w-1/3">
+                                <div className="aspect-[4/3] bg-gray-100 rounded-lg overflow-hidden">
+                                  <img
+                                    src={property.image}
+                                    alt={property.title}
+                                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                  />
+                                </div>
+                              </div>
+
+                              {/* Property Details */}
+                              <div className="md:w-2/3">
+                                <div className="flex justify-between items-start">
+                                  <h4 className="text-xl font-bold text-gray-800">{property.title}</h4>
+                                  <span className="bg-teal-100 text-teal-800 px-2 py-1 rounded text-sm font-medium">
+                                    {property.status}
+                                  </span>
+                                </div>
+
+                                <div className="flex flex-wrap gap-4 mt-3 mb-4">
+                                  <div className="flex items-center text-gray-700">
+                                    <FiDollarSign className="mr-2 text-teal-600" />
+                                    <span>{property.price}</span>
+                                  </div>
+                                  <div className="flex items-center text-gray-700">
+                                    <FiLayers className="mr-2 text-teal-600" />
+                                    <span>{property.size}</span>
+                                  </div>
+                                  <div className="flex items-center text-gray-700">
+                                    <FiMapPin className="mr-2 text-teal-600" />
+                                    <span>{selectedLocation.name}</span>
+                                  </div>
+                                </div>
+
+                                <div className="mb-4">
+                                  <h5 className="font-medium text-gray-800 mb-2">Key Features:</h5>
+                                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                    {property.features.map((feature, index) => (
+                                      <li key={index} className="flex items-start text-gray-600">
+                                        <svg
+                                          className="w-4 h-4 mt-1 mr-2 text-teal-500"
+                                          fill="none"
+                                          stroke="currentColor"
+                                          viewBox="0 0 24 24"
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M5 13l4 4L19 7"
+                                          />
+                                        </svg>
+                                        {feature}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+
+                                <a
+                                  href={`tel:${property.contact.replace(/\D/g, '')}`}
+                                  className="inline-block bg-teal-600 hover:bg-teal-700 text-white py-2 px-4 rounded-lg"
+                                >
+                                  Book a call
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     ) : (
-                      <p className="text-gray-500">No properties available yet.</p>
+                      <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                      <p className="text-yellow-700">No properties currently listed for this location. Check back soon!</p>
+                    </div>
                     )}
                   </div>
                 </div>
               </div>
-            ) : (
-  <div className="bg-white rounded-xl shadow-md p-12 text-center">
+             ) : (
+              <div className="bg-white rounded-xl shadow-md p-12 text-center">
                 <svg className="w-16 h-16 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -204,4 +279,3 @@ export default function LocationsPage() {
     </div>
   );
 }
-
