@@ -40,7 +40,7 @@ export default function Map({ coordinates }) {
       // Add marker
       markerRef.current = L.marker(coordinates)
         .addTo(map)
-        .bindPopup('Property Location')
+        .bindPopup('Plot Location')
         .openPopup();
 
       // Add circle to highlight area
