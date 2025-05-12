@@ -54,16 +54,6 @@ export default function LocationsPage() {
         ],
         
         properties: [ 
-            {
-                id: 101,
-                image:'property1_2.jpeg',
-                title: 'Commercial Corner Plot',
-                price: '45,000',
-                size: '100×100 ft',
-                status: 'Available',
-                features: ['Prime commercial location', 'High visibility', 'Near planned market', 'Full documentation'],
-                contact: '+233 53 379 7792'
-              }
          ]
       },
   ];
@@ -143,7 +133,7 @@ export default function LocationsPage() {
                         <img 
                           src={selectedLocation.images[currentImageIndex]} 
                           alt={`${selectedLocation.name} view ${currentImageIndex + 1}`}
-                          className="w-full h-full object-cover transition-opacity duration-300"
+                          className="w-full h-full transition-opacity duration-300"
                         />
                         
                         <button 
