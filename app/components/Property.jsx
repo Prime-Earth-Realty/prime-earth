@@ -7,15 +7,19 @@ export default function Properties() {
   const properties = [
     {
       id: 1,
-      title: "Uncompleted House For Sale",
+      title: "3-Bedroom Unfinished House – Customize Your Dream Home",
       status: "For Sale",
       price: "$45,000",
-      size: "2,500 sq ft",
-      location: "Abokobi Boi",
+      size: "45×100ft",
+      location: "Abokobi Boi (near Aburi mountains)",
       image: "property1.jpeg",
       features: [
-        "4 Bedrooms",
-        "3 Bathrooms",
+        "3 Bedrooms",
+        "2 Bathrooms",
+        "Hall & Kitchen",
+        "Plastering completed",
+        "Burglar proofing installed",
+        "Fully walled and gated"
       ],
       contact: "+233 53 379 7792",
       media: [
