@@ -168,6 +168,7 @@ export default function Properties() {
                     ref={videoRef}
                     controls
                     autoPlay
+                    muted
                     key={currentProperty.media[selectedMediaIndex].src}
                     className="rounded-lg w-full h-96 object-contain"
                   >
