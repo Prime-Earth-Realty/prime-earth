@@ -47,6 +47,8 @@ export default function LocationsPage() {
         '/Tsopoli/Tsopoli_9.jpeg',
         '/Tsopoli/Tsopoli_10.jpeg',
         '/Tsopoli/Tsopoli_11.jpeg',
+        '/Tsopoli/Tsopoli_12.jpeg',
+        '/Tsopoli/Tsopoli_13.jpeg',
       ],
     },
   ];
