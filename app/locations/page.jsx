@@ -34,7 +34,18 @@ export default function LocationsPage() {
       id: 3,
       name: 'Tsopoli',
       coordinates: [5.872741, 0.209403],
-      description: 'Fast-growing residential area with upcoming infrastructure projects including new roads and commercial centers.',
+      description: [
+        'Fast selling. Total of 50 plots.',
+        '30 mins drive from Central University, Miotso.',
+        '20 mins drive from Dawa Industrial zone.',
+        '13 mins drive from Saglemi Housing development.',
+        '10 minutes drive from Tsopoli junction (along the main Accra-Aflao road).',
+        '3 mins from D/A Primary School Amanakpo.',
+        'Surrounding communities and housing present.',
+        'Access to demarcated road network used by residents.',
+        'Access to Akosombo and Volta Lake.',
+        'The main Accra-Aflao road is currently under expansion and this will see a significant boost in residency and traffic flow.'
+      ],
       images: [
         '/Tsopoli/Tsopoli_3.jpeg',
         '/Tsopoli/Tsopoli_2.jpeg',
@@ -50,8 +61,8 @@ export default function LocationsPage() {
         '/Tsopoli/Tsopoli_12.jpeg',
         '/Tsopoli/Tsopoli_13.jpeg',
       ],
-    },
-  ];
+    }
+  ]
 
   const nextImage = () => {
     setCurrentImageIndex((prev) =>
@@ -127,7 +138,32 @@ export default function LocationsPage() {
                     </div>
                   </div>
 
-                  <p className="text-gray-700 mb-6">{selectedLocation.description}</p>
+                  
+
+          <div className="mb-6">
+           <h5 className="font-medium text-gray-800 mb-2">Key Features:</h5>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              {selectedLocation.description.map((description, index) => (
+                <li key={index} className="flex items-start text-gray-600">
+                  <svg
+                    className="w-4 h-4 mt-1 mr-2 text-teal-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  {description}
+                </li>
+              ))}
+            </ul>
+          </div>
+
 
                   {/* Only show carousel if images exist */}
                   {selectedLocation.images && selectedLocation.images.length > 0 && (
