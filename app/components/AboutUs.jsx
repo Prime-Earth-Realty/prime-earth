@@ -25,7 +25,7 @@ export default function AboutUs() {
                 Established to be at the forefront of the real estate industry, we specialize in providing discerning buyers with exceptional lots and land tailored to meet their precise needs at competitive rates.
               </p>
 
-              <p>
+              <p className="text-lg">
                 Prime Earth Realty is led by forward-thinking Ghanaians with international experience, living in Ghana, the United States and the United Kingdom. Through our global consulting work, we've seen firsthand the premium placed on property ownership.
               </p>
 

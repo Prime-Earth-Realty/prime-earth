@@ -21,6 +21,7 @@ export default function LocationsPage() {
       name: 'Ningo Prampram',
       coordinates: [5.808432294194406, 0.12828909900043034],
       description: 'Fast-growing residential area with upcoming infrastructure projects including new roads and commercial centers.',
+      features : [],
       images: [],
     },
     {
@@ -28,13 +29,15 @@ export default function LocationsPage() {
       name: 'Tema Community 25',
       coordinates: [5.72744634233405, 0.01574986897821217],
       description: 'Fast-growing residential area with upcoming infrastructure projects including new roads and commercial centers.',
+      features : [],
       images: [],
     },
     {
       id: 3,
       name: 'Tsopoli',
       coordinates: [5.872741, 0.209403],
-      description: [
+      description: 'Fast-growing residential area with upcoming infrastructure projects including new roads and commercial centers.',
+      features: [
         'Fast selling. Total of 50 plots.',
         '30 mins drive from Central University, Miotso.',
         '20 mins drive from Dawa Industrial zone.',
@@ -138,12 +141,12 @@ export default function LocationsPage() {
                     </div>
                   </div>
 
-                  
+                  <p className="text-gray-700 mb-6">{selectedLocation.description}</p>
 
           <div className="mb-6">
            <h5 className="font-medium text-gray-800 mb-2">Key Features:</h5>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              {selectedLocation.description.map((description, index) => (
+              {selectedLocation.features.map((features, index) => (
                 <li key={index} className="flex items-start text-gray-600">
                   <svg
                     className="w-4 h-4 mt-1 mr-2 text-teal-500"
@@ -158,7 +161,7 @@ export default function LocationsPage() {
                       d="M5 13l4 4L19 7"
                     />
                   </svg>
-                  {description}
+                  {features}
                 </li>
               ))}
             </ul>
