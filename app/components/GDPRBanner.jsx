@@ -10,17 +10,16 @@ export default function GDPRBanner() {
     const accepted = localStorage.getItem('gdprAccepted');
     if (!accepted) {
       setShowBanner(true);
-      // Trigger slide down after component mounts
       setTimeout(() => setVisible(true), 100);
     }
   }, []);
 
   const handleAccept = () => {
-    setVisible(false); // start slide up animation
+    setVisible(false); 
     setTimeout(() => {
       localStorage.setItem('gdprAccepted', 'true');
       setShowBanner(false);
-    }, 300); // match animation duration
+    }, 300);
   };
 
   if (!showBanner) return null;
