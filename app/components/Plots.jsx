@@ -1,12 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-import Script from 'next/script';
-
 export default function Plots() {
-  const [selectedPlot, setSelectedPlot] = useState('');
-  const [showCalendly, setShowCalendly] = useState(false);
-
   const plotOptions = [
     {
       size: "70×100",
@@ -28,9 +22,10 @@ export default function Plots() {
     }
   ];
 
-  const handleReserveClick = (size) => {
-    setSelectedPlot(size);
-    setShowCalendly(true);
+  const handleReserveClick = ( string) => {
+    const calendlyUrl = new URL('https://calendly.com/primeearthrealty-info/30min');
+    calendlyUrl.searchParams.append('redirect_url', 'https://www.primeearthrealty.com');
+    window.open(calendlyUrl.toString(), '_blank');
   };
 
   return (
@@ -44,11 +39,11 @@ export default function Plots() {
           {/* Plot Cards */}
           <div className="flex-1 flex flex-col md:flex-row md:flex-wrap md:justify-center gap-8">
             {plotOptions.map((plot, index) => (
-              <div 
+              <div
                 key={index}
                 className={`border rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg w-full md:w-[350px] ${
-                  plot.highlight 
-                    ? "border-teal-600 shadow-md transform md:-translate-y-2" 
+                  plot.highlight
+                    ? "border-teal-600 shadow-md transform md:-translate-y-2"
                     : "border-gray-200"
                 }`}
               >
@@ -56,14 +51,14 @@ export default function Plots() {
                   <div className="text-center mb-6">
                     <h3 className="text-2xl font-bold text-gray-900">{plot.size}</h3>
                   </div>
-                  
+
                   <ul className="space-y-3 mb-8">
                     {plot.features.map((feature, i) => (
                       <li key={i} className="flex items-start">
-                        <svg 
-                          className="h-6 w-6 text-teal-600 mr-2 flex-shrink-0" 
-                          fill="none" 
-                          viewBox="0 0 24 24" 
+                        <svg
+                          className="h-6 w-6 text-teal-600 mr-2 flex-shrink-0"
+                          fill="none"
+                          viewBox="0 0 24 24"
                           stroke="currentColor"
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -72,8 +67,8 @@ export default function Plots() {
                       </li>
                     ))}
                   </ul>
-                  
-                  <button 
+
+                  <button
                     onClick={() => handleReserveClick(plot.size)}
                     className={`w-full py-3 rounded-lg font-medium transition-colors ${
                       plot.highlight
@@ -87,21 +82,6 @@ export default function Plots() {
               </div>
             ))}
           </div>
-
-          {/* Calendly Widget */}
-          {showCalendly && (
-            <div className="flex-1">
-              <div 
-                className="calendly-inline-widget" 
-                data-url="https://calendly.com/primeearthrealty-info/30min"
-                style={{ minWidth: '320px', height: '700px' }}
-              ></div>
-              <Script
-                src="https://assets.calendly.com/assets/external/widget.js"
-                strategy="afterInteractive"
-              />
-            </div>
-          )}
         </div>
       </div>
     </section>
